@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 import ConvexClientProvider from '@/components/provider/ConvexClientProvider';
+import Footer from '@/components/Footer';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -27,13 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ClerkProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ConvexClientProvider>{children}</ConvexClientProvider>
-        </body>
-      </ClerkProvider>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-b from bg-gray-900 to-gray-950 text-gray-100 flex flex-col`}
+      >
+        <ConvexClientProvider>{children}</ConvexClientProvider>
+
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,8 +1,8 @@
 import { httpRouter } from 'convex/server';
 import { httpAction } from './_generated/server';
-import process from 'process';
 import { WebhookEvent } from '@clerk/nextjs/server';
 import { Webhook } from 'svix';
+import { api } from './_generated/api';
 
 const http = httpRouter();
 
@@ -17,9 +17,9 @@ http.route({
       throw new Error('Missing CLERK_WEBHOOK_SECRET envionment variable');
     }
 
-    const svix_id = request.headers.get('svix_id');
-    const svix_signature = request.headers.get('svix_signature');
-    const svix_timestamp = request.headers.get('svix_timestamp');
+    const svix_id = request.headers.get('svix-id');
+    const svix_signature = request.headers.get('svix-signature');
+    const svix_timestamp = request.headers.get('svix-timestamp');
 
     if (!svix_id || !svix_signature || !svix_timestamp) {
       return new Response('Error occurred -- no svix headers', {
@@ -54,8 +54,13 @@ http.route({
       const name = `${first_name || ''} ${last_name || ''}`.trim();
 
       try {
-        // save user to db
+        await ctx.runMutation(api.users.syncUser, {
+          userId: id,
+          email,
+          name,
+        });
       } catch (error) {
+        console.log('Error creating user', error);
         return new Response('Error creating user', { status: 500 });
       }
     }
