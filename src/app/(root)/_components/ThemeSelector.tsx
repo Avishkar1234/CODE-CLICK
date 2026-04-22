@@ -14,7 +14,6 @@ import {
   Sun,
 } from 'lucide-react';
 import useMounted from '@/hooks/useMounted';
-// import useMounted from '@/hooks/useMounted';
 
 const THEME_ICONS: Record<string, React.ReactNode> = {
   'vs-dark': <Moon className="size-4" />,
