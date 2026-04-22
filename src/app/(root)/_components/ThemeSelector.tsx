@@ -7,25 +7,26 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   CircleOff,
   Cloud,
-  Github,
+  GithubIcon,
   Laptop,
   Moon,
   Palette,
   Sun,
 } from 'lucide-react';
+import useMounted from '@/hooks/useMounted';
 // import useMounted from '@/hooks/useMounted';
 
 const THEME_ICONS: Record<string, React.ReactNode> = {
   'vs-dark': <Moon className="size-4" />,
   'vs-light': <Sun className="size-4" />,
-  'github-dark': <Github className="size-4" />,
+  'github-dark': <GithubIcon className="size-4" />,
   monokai: <Laptop className="size-4" />,
   'solarized-dark': <Cloud className="size-4" />,
 };
 
 function ThemeSelector() {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const { theme, setTheme } = useCodeEditorStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currentTheme = THEMES.find((t) => t.id === theme);
