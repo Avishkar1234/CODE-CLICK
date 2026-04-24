@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 import ConvexClientProvider from '@/components/provider/ConvexClientProvider';
 import Footer from '@/components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -34,6 +34,7 @@ export default function RootLayout({
         <ConvexClientProvider>{children}</ConvexClientProvider>
 
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
