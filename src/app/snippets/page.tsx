@@ -8,6 +8,7 @@ import NavigationHeader from '@/components/NavigationHeader';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { BookOpen, Code, Grid, Layers, Search, Tag, X } from 'lucide-react';
+import SnippetCard from './_components/SnippetCard';
 // import SnippetCard from './_components/SnippetCard';
 
 function SnippetsPage() {
@@ -178,11 +179,11 @@ function SnippetsPage() {
           }`}
           layout
         >
-          {/* <AnimatePresence mode="popLayout">
+          <AnimatePresence mode="popLayout">
             {filteredSnippets.map((snippet) => (
               <SnippetCard key={snippet._id} snippet={snippet} />
             ))}
-          </AnimatePresence> */}
+          </AnimatePresence>
         </motion.div>
 
         {/* edge case: empty state */}
