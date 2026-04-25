@@ -10,6 +10,7 @@ import { Clock, Code, MessageSquare, User } from 'lucide-react';
 import { Editor } from '@monaco-editor/react';
 import { defineMonacoThemes, LANGUAGE_CONFIG } from '@/app/(root)/_constants';
 import CopyButton from './_components/CopyButton';
+import Comments from './_components/Comments';
 
 function SnippetDetailPage() {
   const snippetId = useParams().id;
@@ -17,6 +18,7 @@ function SnippetDetailPage() {
   const snippet = useQuery(api.snippets.getSnippetById, {
     snippetId: snippetId as Id<'snippets'>,
   });
+
   const comments = useQuery(api.snippets.getComments, {
     snippetId: snippetId as Id<'snippets'>,
   });
@@ -97,7 +99,7 @@ function SnippetDetailPage() {
             />
           </div>
 
-          {/* <Comments snippetId={snippet._id} /> */}
+          <Comments snippetId={snippet._id} />
         </div>
       </main>
     </div>
