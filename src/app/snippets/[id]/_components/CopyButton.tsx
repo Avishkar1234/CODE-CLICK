@@ -6,7 +6,8 @@ import React, { useState } from 'react';
 function CopyButton({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);
 
-  const copyToClipboard = async () => {
+  const copyToClipboard = async (e: React.MouseEvent) => {
+    e.stopPropagation();
     await navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -15,6 +16,7 @@ function CopyButton({ code }: { code: string }) {
   return (
     <button
       onClick={copyToClipboard}
+      type="button"
       className="p-2 hover:bg-white/10 rounded-lg transition-all duration-200 group relative"
     >
       {copied ? (
