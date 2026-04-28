@@ -73,7 +73,7 @@ function OutputPanel() {
           ) : error ? (
             <div className="space-y-4">
               {/* Error Header */}
-              <div className="flex items-start gap-3 text-red-400">
+              <div className="flex justify-center items-start gap-3 text-red-400">
                 <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-1" />
                 <div className="space-y-1">
                   <div className="font-medium text-blue-300">
