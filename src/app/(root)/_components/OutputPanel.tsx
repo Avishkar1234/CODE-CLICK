@@ -7,6 +7,7 @@ import {
   Clock,
   Copy,
   Terminal,
+  Info,
 } from 'lucide-react';
 import React, { useState } from 'react';
 import RunningCodeSkeleton from './RunningCodeSkeleton';
@@ -16,6 +17,12 @@ function OutputPanel() {
   const [isCopied, setIsCopied] = useState(false);
 
   const hasContent = error || output;
+
+  const isProductionError =
+    error?.includes('whitelist') ||
+    error?.includes('Piston') ||
+    error?.includes('fetch') ||
+    error?.includes('500');
 
   const handleCopy = async () => {
     if (!hasContent) return;
@@ -67,14 +74,40 @@ function OutputPanel() {
             {isRunning ? (
               <RunningCodeSkeleton />
             ) : error ? (
-              <div className="flex items-start gap-3 text-red-400">
-                <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-1" />
-                <div className="space-y-1">
-                  <div className="font-medium">Execution Error</div>
-                  <pre className="whitespace-pre-wrap text-red-400/80">
-                    {error}
-                  </pre>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3 text-red-400">
+                  <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-1" />
+                  <div className="space-y-1">
+                    <div className="font-medium">Execution Error</div>
+                    <pre className="whitespace-pre-wrap text-red-400/80">
+                      {error}
+                    </pre>
+                  </div>
                 </div>
+
+                {isProductionError && (
+                  <div className="flex items-start gap-3 bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-blue-400">
+                    <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                    <div className="space-y-1 text-xs">
+                      <p className="font-medium text-blue-300">
+                        Running locally? Code execution works out of the box.
+                      </p>
+                      <p className="text-blue-400/70">
+                        This live demo does not support code execution as it
+                        requires a self-hosted Piston instance. Clone the repo
+                        and run it locally with Docker to use this feature.
+                      </p>
+                      <a
+                        href="https://github.com/Avishkar1234/CODE-CLICK"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-1 text-blue-400 underline hover:text-blue-300 transition-colors"
+                      >
+                        View setup instructions on GitHub →
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : output ? (
               <div className="space-y-2">
