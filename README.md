@@ -1,36 +1,304 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 CodeCraft — Interactive Code Editor with Sandboxed Execution
 
-## Getting Started
+A full-stack interactive code editor that supports multi-language execution using a secure sandboxed environment.
 
-First, run the development server:
+> ⚠️ **Note:** Code execution is disabled in the live demo due to infrastructure limitations (Docker not supported on Vercel).
+> ✅ Full functionality is available when running locally.
+
+---
+
+# 🌐 Live Demo
+
+👉 https://code-click-five.vercel.app/
+
+---
+
+# 🧠 Features
+
+* ⚡ Real-time code execution
+* 🎨 Monaco-based editor (VS Code-like experience)
+* 🔐 Authentication (Clerk)
+* 💾 Snippet saving (Convex DB)
+* 💳 Pro upgrade system (LemonSqueezy)
+* 🐳 Secure sandboxed execution using Docker + Piston
+
+---
+
+# 🏗️ Architecture Overview
+
+```
+Frontend (Next.js)
+        ↓
+API Route (/api/execute)
+        ↓
+Piston (Docker sandbox)
+        ↓
+Language runtimes (Node, Python, C++, etc.)
+```
+
+---
+
+# ⚠️ Why Code Execution Doesn’t Work in Production
+
+Platforms like Vercel **do not support Docker or privileged containers**.
+
+This project uses **Piston**, which requires:
+
+* filesystem access
+* process isolation
+* containerization
+
+👉 Therefore:
+
+* ❌ Production (Vercel): execution disabled
+* ✅ Local (Docker): execution works perfectly
+
+---
+
+# 🛠️ Local Setup (FULL GUIDE)
+
+## 📦 Prerequisites
+
+Install these FIRST:
+
+### 1. Node.js (v18+)
+
+#### Windows (PowerShell)
+
+```powershell
+winget install OpenJS.NodeJS
+```
+
+#### macOS/Linux (Bash)
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+---
+
+### 2. Docker (REQUIRED)
+
+#### Windows
+
+* Install Docker Desktop: https://www.docker.com/products/docker-desktop/
+* Enable:
+
+  * WSL2
+  * Virtualization
+
+#### macOS
+
+```bash
+brew install --cask docker
+```
+
+#### Linux
+
+```bash
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+Verify:
+
+```bash
+docker --version
+```
+
+---
+
+### 3. Git
+
+```bash
+git --version
+```
+
+If not installed:
+
+#### Windows
+
+```powershell
+winget install Git.Git
+```
+
+#### Linux/macOS
+
+```bash
+sudo apt install git -y
+```
+
+---
+
+# 📥 Clone the Repository
+
+```bash
+git clone https://github.com/Avishkar1234/CODE-CLICK.git
+cd CODE-CLICK
+```
+
+---
+
+# 📦 Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+# 🐳 Run Piston (Code Execution Engine)
+
+## Pull Image
+
+```bash
+docker pull ghcr.io/engineer-man/piston
+```
+
+## Run Container
+
+```bash
+docker run -d -p 2000:2000 --name piston ghcr.io/engineer-man/piston
+```
+
+Verify:
+
+```bash
+docker ps
+```
+
+---
+
+# ⚙️ Environment Variables
+
+Create `.env.local` in root:
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
+CLERK_SECRET_KEY=your_key
+
+NEXT_PUBLIC_CONVEX_URL=your_convex_url
+
+LEMON_SQUEEZY_API_KEY=your_key
+```
+
+---
+
+# ▶️ Run the App
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 🧪 Test Code Execution
 
-To learn more about Next.js, take a look at the following resources:
+Try:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```js
+console.log("Hello World");
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+👉 Output should appear instantly.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 🛑 Common Issues
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ❌ "Execution unavailable"
+
+✔ Make sure Docker is running
+
+```bash
+docker ps
+```
+
+---
+
+## ❌ Port 2000 not working
+
+```bash
+docker restart piston
+```
+
+---
+
+## ❌ Permission issues (Linux)
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+Then restart terminal.
+
+---
+
+# 🧠 Supported Languages
+
+Handled by Piston automatically:
+
+* JavaScript (Node.js)
+* Python
+* C++
+* Java
+* Go
+* Rust
+* and more...
+
+👉 No manual installation required — Docker handles everything.
+
+---
+
+# 🚀 Deployment Notes
+
+| Feature        | Vercel |
+| -------------- | ------ |
+| UI             | ✅      |
+| Auth           | ✅      |
+| Database       | ✅      |
+| Code Execution | ❌      |
+
+---
+
+# 🎯 For Recruiters
+
+> Code execution requires sandboxing via containers (Docker).
+> Serverless platforms like Vercel do not support this for security reasons.
+> This project handles that gracefully and works fully in a local environment.
+
+---
+
+# 📌 Future Improvements
+
+* Switch to Judge0 / self-hosted execution API
+* Add queue-based execution system
+* Add rate limiting & usage quotas
+* Improve execution logs & debugging
+
+---
+
+# 🤝 Contributing
+
+Feel free to fork and improve!
+
+---
+
+# ⭐ If you liked this project
+
+Give it a star ⭐ on GitHub — it helps a lot!
+
+---
+
+# 🧑‍💻 Author
+
+Avishkar Mandlik
