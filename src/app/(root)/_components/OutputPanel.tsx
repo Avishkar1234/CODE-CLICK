@@ -76,7 +76,9 @@ function OutputPanel() {
               <div className="flex items-start gap-3 text-red-400">
                 <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-1" />
                 <div className="space-y-1">
-                  <div className="font-medium">Execution Error</div>
+                  <div className="font-medium text-blue-300">
+                    Code Execution Unavailable in Live Demo
+                  </div>
 
                   {/* Show raw error ONLY if not production */}
                   {!isProductionError && (
