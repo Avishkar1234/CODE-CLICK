@@ -258,16 +258,17 @@ Handled by Piston automatically:
 👉 No manual installation required — Docker handles everything.
 
 ---
-
 # 🚀 Deployment Notes
 
-| Feature        | Vercel |
-| -------------- | ------ |
-| UI             | ✅      |
-| Auth           | ✅      |
-| Database       | ✅      |
-| Code Execution | ❌      |
+| Feature        | Vercel (Production) | Local (Docker + Piston) |
+|----------------|---------------------|--------------------------|
+| UI             | ✅                  | ✅                       |
+| Auth           | ✅                  | ✅                       |
+| Database       | ✅                  | ✅                       |
+| Code Execution | ❌                  | ✅                       |
 
+> Code execution requires containerization, which is not supported on Vercel.
+> Full functionality is available when running locally using Docker + Piston.
 ---
 
 # 🎯 For Recruiters
