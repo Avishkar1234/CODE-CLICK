@@ -18,7 +18,7 @@ export const LANGUAGE_CONFIG: LanguageConfig = {
     id: 'javascript',
     label: 'JavaScript',
     logoPath: '/javascript.png',
-    pistonRuntime: { language: 'javascript', version: '18.15.0' }, // api that we're gonna be using
+    pistonRuntime: { language: 'javascript', version: '18.15.0' },
     monacoLanguage: 'javascript',
     defaultCode: `// JavaScript Playground
 const numbers = [1, 2, 3, 4, 5];
@@ -215,7 +215,7 @@ func main() {
     id: 'cpp',
     label: 'C++',
     logoPath: '/cpp.png',
-    pistonRuntime: { language: 'cpp', version: '10.2.0' },
+    pistonRuntime: { language: 'c++', version: '10.2.0' }, // ✅ fixed: 'cpp' → 'c++'
     monacoLanguage: 'cpp',
     defaultCode: `#include <iostream>
 #include <vector>
@@ -259,7 +259,7 @@ int main() {
     id: 'csharp',
     label: 'C#',
     logoPath: '/csharp.png',
-    pistonRuntime: { language: 'csharp', version: '6.12.0' },
+    pistonRuntime: { language: 'mono', version: '6.12.0' }, // ✅ fixed: 'csharp' → 'mono'
     monacoLanguage: 'csharp',
     defaultCode: `using System;
 using System.Linq;
