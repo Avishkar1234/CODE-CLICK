@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
   const body = await req.json();
 
-  const response = await fetch('http://localhost:2000/api/v2/execute', {
+  const response = await fetch('https://emkc.org/api/v2/piston/execute', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
