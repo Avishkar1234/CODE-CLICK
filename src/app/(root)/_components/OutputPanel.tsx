@@ -1,13 +1,7 @@
 'use client';
 
 import { useCodeEditorStore } from '@/store/useCodeEditorStore';
-import {
-  AlertTriangle,
-  CheckCircle,
-  Clock,
-  Copy,
-  Terminal,
-} from 'lucide-react';
+import { CheckCircle, Clock, Copy, Info, Terminal } from 'lucide-react';
 import React, { useState } from 'react';
 import RunningCodeSkeleton from './RunningCodeSkeleton';
 
@@ -73,8 +67,8 @@ function OutputPanel() {
           ) : error ? (
             <div className="space-y-4">
               {/* Error Header */}
-              <div className="flex justify-start items-center gap-3 text-red-400 mb-3">
-                <AlertTriangle className="w-5 h-5 flex-shrink-0" />
+              <div className="flex justify-start items-center gap-3 text-blue-400 mb-3">
+                <Info className="w-5 h-5 flex-shrink-0" />
                 <div className="space-y-1">
                   <div className="font-medium text-blue-300">
                     Code Execution Unavailable in Live Demo
