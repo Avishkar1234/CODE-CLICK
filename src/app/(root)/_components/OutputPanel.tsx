@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useCodeEditorStore } from '@/store/useCodeEditorStore';
-import { CheckCircle, Clock, Copy, Info, Terminal } from 'lucide-react';
-import React, { useState } from 'react';
-import RunningCodeSkeleton from './RunningCodeSkeleton';
+import { useCodeEditorStore } from "@/store/useCodeEditorStore";
+import { CheckCircle, Clock, Copy, Info, Terminal } from "lucide-react";
+import React, { useState } from "react";
+import RunningCodeSkeleton from "./RunningCodeSkeleton";
 
 function OutputPanel() {
   const { output, error, isRunning } = useCodeEditorStore();
@@ -13,8 +13,8 @@ function OutputPanel() {
 
   // 🔥 Detect production limitation error
   const isProductionError =
-    typeof error === 'string' &&
-    error.includes('Code execution is not available');
+    typeof error === "string" &&
+    error.includes("Code execution is not available");
 
   const handleCopy = async () => {
     if (!hasContent) return;
